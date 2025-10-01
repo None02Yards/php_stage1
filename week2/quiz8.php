@@ -1,34 +1,60 @@
 <?php
 
-$digitnum = $_GET['number'] ?? '';
-$output = '';
+$digitnum = "5";   // "5", "10", "99"
 
 if ($digitnum !== '') {
-    $n = (int)$digitnum;                 
-    if ($n < 1) $n = 1;
+    $n = (int)$digitnum;
+    if ($n < 1)  $n = 1;
     if ($n > 99) $n = 99;
 
-    $output = "<pre>";
+    $out = '';
     $row = 1;
-    do {                             
+    do { 
         $line = '';
         $col = 1;
-        do {                           
+        do { 
             $line .= '*';
             $col++;
         } while ($col <= $row);
 
-        $out .= $line . "\n";          
+        $out .= $line . PHP_EOL; 
         $row++;
     } while ($row <= $n);
-    $output .= "</pre>";
+
+    echo $out;
+} else {
+    echo "No input" . PHP_EOL;
 }
+
 ?>
-<!doctype html>
-<html><body>
-  <form method="get">
-    <input style="width: 200px;" name="number" type="number" min="1" max="99" placeholder="Enter Number to get its triangle"
-           value="<?=((string)$digitnum) ?>">
-  </form>
-  <?= $out ?>
-</body></html>
+
+<!-- using array -->
+
+<?php
+$digitnum = "5";  
+
+if ($digitnum === '') {
+    echo "No input\n";
+    exit;
+}
+$n = (int)$digitnum;
+if ($n < 1)  $n = 1;
+if ($n > 99) $n = 99;
+
+$lines = [];
+$row = 1;
+
+do {
+    $line = '';
+    $col = 1;
+    do {
+        $line .= '*';
+        $col++;
+    } while ($col <= $row);
+
+    array_push($lines, $line);  
+    $row++;
+} while ($row <= $n);
+
+
+echo implode(PHP_EOL, $lines) . PHP_EOL;

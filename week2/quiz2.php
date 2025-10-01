@@ -1,28 +1,79 @@
 <?php
-$ndigit = $_GET['num'] ?? '';
-$outresult = '';
+$input = "10";  
 
-if ($ndigit !== '') {
-    $X = (int)$ndigit;
-    if ($X < 1)   $X = 1;
-    if ($X > 1000) $X = 1000;
+$N = (int)$input;
 
-    if ($X < 2) {
-        $outresult = "<pre>-1</pre>";
-    } else {
-        $outresult = "<pre>";
-        for ($i = 2; $i <= $X; $i += 2) {
-            $outresult .= $i . "\n";   
-        }
-        $outresult .= "</pre>";
+if ($N < 1)  $N = 1;
+if ($N > 1000) $N = 1000;
+
+if ($N < 2) {
+    echo "-1" . PHP_EOL;
+} else {
+    for ($i = 2; $i <= $N; $i += 2) {
+        echo $i . PHP_EOL;
     }
 }
 ?>
-<!doctype html>
-<html><body>
-  <form method="get">
-    <input name="num" type="number" min="1" max="1000" placeholder="Enter Num"
-           value="<?=((string)$ndigit) ?>">
-  </form>
-  <?= $outresult ?>
-</body></html>
+ 
+ <!-- using function -->
+
+ <?php
+function printEvenUpTo_String(string $numParam): void {
+    if ($numParam === '') {
+        echo "No input." . PHP_EOL;
+        return;
+    }
+
+    $N = (int)$numParam;
+    if ($N < 1)  $N = 1;
+    if ($N > 1000) $N = 1000;
+
+    if ($N < 2) {
+        echo "-1" . PHP_EOL;
+        return;
+    }
+    $evens = [];
+    for ($i = 2; $i <= $N; $i += 2) {
+        $evens[] = $i;
+    }
+
+    // print output using foreach
+    foreach ($evens as $val) {
+        echo $val . PHP_EOL;
+    }
+}
+
+
+printEvenUpTo_String("10"); //  2 4 6 8 10
+
+
+?>
+
+<!-- using usable function -->
+
+<?php
+function buildEvenArrayUpTo_String(string $numParam): array {
+    if ($numParam === '') return [];
+
+    $N = (int)$numParam;
+    if ($N < 1)  $N = 1;
+    if ($N > 1000) $N = 1000;
+
+    if ($N < 2) return [];
+
+    $evens = [];
+    for ($i = 2; $i <= $N; $i += 2) {
+        $evens[] = $i;
+    }
+    return $evens;
+}
+
+$evens = buildEvenArrayUpTo_String("10");
+
+if (empty($evens)) {
+    echo "-1" . PHP_EOL;
+} else {
+    foreach ($evens as $val) {
+        echo $val . PHP_EOL;
+    }
+}

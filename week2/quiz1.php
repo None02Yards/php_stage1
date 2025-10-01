@@ -1,34 +1,24 @@
 <?php
-$input = "5";  
+$numParam = $_GET['num'] ?? '';
+$output = '';
 
-$N = (int)$input;
-
-if ($N >= 1 && $N <= 1000) {
-    for ($i = 1; $i <= $N; $i++) {
-        echo $i . PHP_EOL;
-    }
-} else {
-    echo "N must be between 1 and 1000." . PHP_EOL;
-}
-
-?>
-
-<!-- using function -->
-<?php
-function printFrom1ToN_String(string $numParam): void {
-    if ($numParam === '') {
-        echo "No input.\n";
-        return;
-    }
-
+if ($numParam !== '') {
     $n = (int)$numParam;
-
     if ($n < 1)  $n = 1;
     if ($n > 1000) $n = 1000;
 
+    $output = "<pre>";
     for ($i = 1; $i <= $n; $i++) {
-        echo $i . PHP_EOL;
+        $output .= $i . "\n";   
     }
+    $output .= "</pre>";
 }
-
-printFrom1ToN_String("7");   
+?>
+<!doctype html>
+<html><body>
+  <form method="get">
+    <input style="width: 200px;" name="num" type="number" min="1" max="1000" placeholder="Enter Number"
+           value="<?=((string)$numParam) ?>">
+  </form>
+  <?= $output ?>
+</body></html>

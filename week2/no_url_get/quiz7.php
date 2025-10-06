@@ -15,7 +15,7 @@ function printLuckyRange(int $a, int $b): void {
             $t = intdiv($t, 10);
         } while ($t > 0);
 
-        // الطباعة داخل نفس الدالة
+       
         if ($ok) {
             if ($printed) echo ' ';
             echo $n;

@@ -1,33 +1,30 @@
 <?php
-function printLuckyRange_void(string $input): void {
-    if ($input === '') { echo "No input\n"; return; }
-    $parts = explode(' ', $input, 2);
-    if (count($parts) !== 2 || $parts[0] === '' || $parts[1] === '') {
-        echo "Usage: type \"A B\" (2 numbers)\n";
-        return;
-    }
-    $a = (int)$parts[0];
-    $b = (int)$parts[1];
+function printLuckyRange(int $a, int $b): void {
+     
     if ($a > $b) { $t = $a; $a = $b; $b = $t; }
+    if ($b < 1) { echo "-1\n"; return; }
+    if ($a < 1) $a = 1;
 
-    $out = [];
+    $printed = false;
     for ($n = $a; $n <= $b; $n++) {
-   
-        if ($n == 0) continue;
+        
         $t = $n; $ok = true;
         do {
             $d = $t % 10;
-            if ($d != 4 && $d != 7) { $ok = false; break; }
+            if ($d !== 4 && $d !== 7) { $ok = false; break; }
             $t = intdiv($t, 10);
         } while ($t > 0);
 
-        if ($ok) { $out[] = $n; }
+        // الطباعة داخل نفس الدالة
+        if ($ok) {
+            if ($printed) echo ' ';
+            echo $n;
+            $printed = true;
+        }
     }
-
-    echo empty($out) ? "-1\n" : (implode(' ', $out) . "\n");
+    echo $printed ? PHP_EOL : "-1\n";
 }
-
-printLuckyRange_void("1 100");   // 4 7 44 47 74 77
+printLuckyRange(4, 20); // 4 7
 
 
 ?>

@@ -1,5 +1,5 @@
 <?php
-$numbersParam = " 1  8 5  7 5 "; // مثال؛ مش مهم حتى لو فيه مسافات زيادة
+$numbersParam = " 1  8 5  7 5 "; 
 $result = '';
 
 if ($numbersParam !== '') {

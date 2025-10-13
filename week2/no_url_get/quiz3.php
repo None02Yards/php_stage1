@@ -33,3 +33,18 @@ if ($numbersParam !== '') {
 }
 
 echo $result, PHP_EOL;
+?>
+
+<!-- a simple way convert to an array and get the max  -->
+<?php
+$line = "1 8 5 7 5";
+$nums = explode(' ', $line);
+
+$max = (int)$nums[0];
+for ($i = 1; $i < count($nums); $i++) {
+    if ((int)$nums[$i] > $max) {
+        $max = (int)$nums[$i];
+    }
+}
+
+echo $max; 

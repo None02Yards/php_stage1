@@ -40,12 +40,10 @@ class Circle {
         return new self(1.0, "red");
     }
 
-    // "Constructor with radius" (one arg): color still "red"
     public static function createWithRadius(float $radius): self {
         return new self($radius, "red");
     }
 
-    // Public methods required by the task
     public function getRadius(): float {
         return $this->radius;
     }

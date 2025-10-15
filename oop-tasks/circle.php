@@ -1,73 +1,44 @@
 <?php
-class Circle {
-    // Encaps!
-    private float $radius;
-    private string $color;
-    public function __construct(float $radius = 1.0, string $color = "red") {
-        $this->radius = $radius;
-        $this->color  = $color;
+class Circle
+{
+    // Defaults per spec
+    private float $radius = 1.0;
+    private string $color = 'red';
+
+    public function __construct(float $radius = 1.0, string $color = 'red')
+    {
+        $this->setRadius($radius);
+        $this->setColor($color);
     }
-
-    public function getRadius(): float {
-        return $this->radius;
-    }
-
-    public function getArea(): float {
-        return M_PI * $this->radius * $this->radius;
-    }
-}
-
-$c2 = new Circle(2);     
-echo $c2->getRadius() . PHP_EOL; 
-echo $c2->getArea();  
-
-?>
-
-<!-- another way using private  constructor  -->
-
-<?php
-class Circle {
-    private float $radius;
-    private string $color;
-
-    private function __construct(float $radius, string $color) {
-        $this->radius = $radius;
-        $this->color  = $color;
-    }
-
     
-    public static function createDefault(): self {
-        return new self(1.0, "red");
+    // Getters
+    public function getRadius(): float { return $this->radius; }
+    public function getColor(): string { return $this->color; }
+    // Setters
+    public function setRadius(float $radius): void
+    {
+        $this->radius = $radius;
     }
-
-    public static function createWithRadius(float $radius): self {
-        return new self($radius, "red");
+    public function setColor(string $color): void
+    {
+        $this->color = $color;
     }
+// calc
+    public function getArea(): float
+    {
+        $pi = 3.14159; // manually pi
+    return $pi * $this->radius * $this->radius;    }
 
-    public function getRadius(): float {
-        return $this->radius;
+    public function __toString(): string
+    {
+    return "Circle[radius={$this->radius}, color={$this->color}]";
     }
-
-    public function getArea(): float {
-        return M_PI * $this->radius * $this->radius; // π r^2
     }
-}
-
-$c1 = Circle::createDefault();     
-$c2 = Circle::createWithRadius(2.5);
-
-echo $c1->getRadius() . PHP_EOL;   
-echo $c1->getArea()   . PHP_EOL;   
-echo $c2->getRadius()  . PHP_EOL;
-echo $c2->getArea()   . PHP_EOL;
-
 
 ?>
 
-<!-- using final class just tolock on the private construct and the static methods -->
- <!-- so no need for known values to be extands -->
 <?php
-final class Circle {
+class Circle2 {
     private float $radius;
     private string $color;
 
@@ -79,22 +50,44 @@ final class Circle {
     public static function createDefault(): self {
         return new self(1.0, "red");
     }
-
     public static function createWithRadius(float $radius): self {
-        if ($radius <= 0) {
-            throw new InvalidArgumentException("Radius must be positive.");
-        }
         return new self($radius, "red");
     }
 
-    public function getRadius(): float { return $this->radius; }
-    public function getArea(): float { return M_PI * $this->radius * $this->radius; }
+    public static function createWithColor(string $color): self {
+    return new self(1.0, $color);
 }
 
-$c1 = Circle::createDefault();     
-$c2 = Circle::createWithRadius(2.5);
 
-echo $c1->getRadius() . PHP_EOL;   
-echo $c1->getArea()   . PHP_EOL;   
-echo $c2->getRadius()  . PHP_EOL;
-echo $c2->getArea()   . PHP_EOL;
+    public function getColor(): string {
+        return $this->color;
+    }
+
+    public function getRadius(): float {
+        return $this->radius;
+    }
+
+    public function getArea(): float {
+        $pi = 3.14159; // manually pi 
+    return $pi * $this->radius * $this->radius; // πr²
+    }
+
+    public function setRadius(float $radius): void {
+        $this->radius = $radius;
+    }
+
+    public function setColor(string $color): void {
+        $this->color = $color;
+    }
+     
+    public function __toString(): string {
+        return "Circle[radius={$this->radius},color={$this->color}]";
+    }
+}
+
+function printCircleInfo(Circle2 $circle): void {
+    echo $circle . "<br>";
+    echo "Radius: {$circle->getRadius()}<br>";
+    echo "Color: {$circle->getColor()}<br>";
+    echo "Area: {$circle->getArea()}<br><br>";
+}

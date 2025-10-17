@@ -25,7 +25,6 @@ class Time {
         $this->second = $second;
     }
 
-    // 🔹 Helper to increment a minute
     private function incrementMin(): void {
         $this->minute++;
         if ($this->minute >= 60) {
@@ -34,7 +33,6 @@ class Time {
         }
     }
 
-    // 🔹 Helper to decrement a minute
     private function decrementMin(): void {
         $this->minute--;
         if ($this->minute < 0) {
@@ -42,8 +40,6 @@ class Time {
             $this->hour = ($this->hour - 1 + 24) % 24;
         }
     }
-
-    // 🕒 Next second logic
     public function nextSecond(): self {
         $this->second++;
         if ($this->second >= 60) {
@@ -52,8 +48,6 @@ class Time {
         }
         return $this;
     }
-
-    // 🕒 Previous second logic
     public function previousSecond(): self {
         $this->second--;
         if ($this->second < 0) {
@@ -63,7 +57,6 @@ class Time {
         return $this;
     }
 
-    // 🎯 Format: "hh:mm:ss"
     public function __toString(): string {
         $wedges = [$this->hour, $this->minute, $this->second];
         $withLeadingZero = array_map(fn($n) => ($n < 10 ? "0" : "") . $n, $wedges);

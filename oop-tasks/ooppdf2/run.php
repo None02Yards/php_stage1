@@ -28,9 +28,6 @@ testMultipleBalls();
 
 echo"<br>";
 
-// $date = new Date(5, 9, 2025);
-// echo $date;
-
 echo "<h2>Date</h2>";
 testDate();
 

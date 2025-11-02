@@ -1,5 +1,4 @@
 
-<!-- 2 classes with the same requirements but different methods -->
 <?php
 class Employee {
     private int $id;

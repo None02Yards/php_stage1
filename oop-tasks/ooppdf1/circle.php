@@ -11,10 +11,8 @@ class Circle
         $this->setColor($color);
     }
     
-    // Getters
     public function getRadius(): float { return $this->radius; }
     public function getColor(): string { return $this->color; }
-    // Setters
     public function setRadius(float $radius): void
     {
         $this->radius = $radius;
@@ -23,7 +21,6 @@ class Circle
     {
         $this->color = $color;
     }
-// calc
     public function getArea(): float
     {
         $pi = 3.14159; // manually pi
